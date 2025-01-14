@@ -3,7 +3,7 @@
 ## Summary
 
 1. [Description](#description)
-2. [How To Interact With The Contract](#how-to-interact-with-the-contract)
+2. [Features](#features)
 3. [Token ID](#token-id)
 4. [Running Tests](#running-tests)
 5. [How To Deploy The Contract](#how-to-deploy-the-contract)
@@ -13,7 +13,7 @@
 
 A Solidity smart contract implementing soulbound ERC1155 tokens for in-game quests. This contract ensures that tokens representing quests or achievements cannot be transferred or approved for transfer, effectively making them soulbound.
 
-## How To Interact With The Contract
+## Features
 
 - Soulbound Tokens: Tokens cannot be transferred approved for transfer or burned by anyone, including the owner.
 - Access Control: Utilizes OpenZeppelin's AccessControl for role-based permissions.
@@ -33,15 +33,17 @@ mint and mintBatch functions accept an Id that will be constructed off-chain thi
 To run tests, run the following command
 
 ```bash
-  make test-all
+    make test-all
 ```
 
 ## How To Deploy The Contract
 
-you need to add an account, give it a name and add it to the .env file, then run
+you need to add an account [using cast wallet import](https://book.getfoundry.sh/reference/cast/cast-wallet-import), give it a name and add it to the .env.testnet file (or the .env.mainnet, to deploy on mainnet), then run
 
-```
-make deploy-testnet
+> the command below is to deploy on testnet. Commands to deploy on mainnet will come shortly.
+
+```bash
+    make deploy-testnet
 ```
 
 ## Deployed Contract
