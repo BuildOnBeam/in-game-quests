@@ -1,5 +1,4 @@
-
-test:
+test-all:
 	forge test
 
 coverage:
