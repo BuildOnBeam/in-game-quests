@@ -1,0 +1,255 @@
+Compiling 46 files with Solc 0.8.25
+Solc 0.8.25 finished in 3.21s
+Compiler run successful!
+Analysing contracts...
+Running tests...
+
+Ran 8 tests for test/InGameQuest.t.sol:InGameQuestTest
+[PASS] testFailBatchTransferSoulbound() (gas: 75790)
+[PASS] testFailSetApproval() (gas: 9554)
+[PASS] testFailTransferSoulbound() (gas: 43553)
+[PASS] testInitialSetup() (gas: 18996)
+[PASS] testIsApprovedForAllReturnsFalse() (gas: 19645)
+[PASS] testMintToken() (gas: 48000)
+[PASS] testSetURI() (gas: 75099)
+[PASS] testSupportsInterface() (gas: 18382)
+Suite result: ok. 8 passed; 0 failed; 0 skipped; finished in 8.73ms (22.58ms CPU time)
+
+Ran 1 test suite in 166.73ms (8.73ms CPU time): 8 tests passed, 0 failed, 0 skipped (8 total tests)
+Uncovered for src/InGameQuest.sol:
+- Line (location: source ID 44, lines 62..63, bytes 2254..2266, hits: 0)
+- Statement (location: source ID 44, lines 62..63, bytes 2254..2266, hits: 0)
+
+Anchors for Contract "Vm" (solc 0.8.25, source ID 14):
+
+Anchors for Contract "Script" (solc 0.8.25, source ID 1):
+
+Anchors for Contract "console" (solc 0.8.25, source ID 15):
+
+Anchors for Contract "IERC1155Receiver" (solc 0.8.25, source ID 29):
+
+Anchors for Contract "stdMath" (solc 0.8.25, source ID 8):
+
+Anchors for Contract "StdUtils" (solc 0.8.25, source ID 12):
+
+Anchors for Contract "IERC165" (solc 0.8.25, source ID 17):
+
+Anchors for Contract "Comparators" (solc 0.8.25, source ID 34):
+
+Anchors for Contract "IERC20" (solc 0.8.25, source ID 18):
+
+Anchors for Contract "StdCheatsSafe" (solc 0.8.25, source ID 4):
+
+Anchors for Contract "Test" (solc 0.8.25, source ID 13):
+
+Anchors for Contract "SafeCast" (solc 0.8.25, source ID 42):
+
+Anchors for Contract "IAccessControl" (solc 0.8.25, source ID 25):
+
+Anchors for Contract "InGameQuest" (solc 0.8.25, source ID 44):
+- IC 5 -> Item 4
+- Runtime code
+  - Refers to item: Line (location: source ID 44, lines 15..16, bytes 706..737, hits: 8)
+- IC 5 -> Item 5
+- Runtime code
+  - Refers to item: Statement (location: source ID 44, lines 15..16, bytes 706..737, hits: 8)
+- IC 81 -> Item 6
+- Runtime code
+  - Refers to item: Line (location: source ID 44, lines 18..21, bytes 750..853, hits: 2)
+- IC 81 -> Item 7
+- Runtime code
+  - Refers to item: Function "setURI" (location: source ID 44, lines 18..21, bytes 750..853, hits: 2)
+- IC 100 -> Item 8
+- Runtime code
+  - Refers to item: Line (location: source ID 44, lines 19..20, bytes 831..846, hits: 1)
+- IC 100 -> Item 9
+- Runtime code
+  - Refers to item: Statement (location: source ID 44, lines 19..20, bytes 831..846, hits: 1)
+- IC 408 -> Item 10
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 22..25, bytes 859..1015, hits: 3)
+- IC 408 -> Item 11
+- Creation code
+  - Refers to item: Function "mint" (location: source ID 44, lines 22..25, bytes 859..1015, hits: 3)
+- IC 1191 -> Item 12
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 23..24, bytes 976..1008, hits: 2)
+- IC 1191 -> Item 13
+- Creation code
+  - Refers to item: Statement (location: source ID 44, lines 23..24, bytes 976..1008, hits: 2)
+- IC 720 -> Item 14
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 26..32, bytes 1021..1219, hits: 1)
+- IC 720 -> Item 15
+- Creation code
+  - Refers to item: Function "mintBatch" (location: source ID 44, lines 26..32, bytes 1021..1219, hits: 1)
+- IC 2133 -> Item 16
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 30..31, bytes 1178..1212, hits: 1)
+- IC 2133 -> Item 17
+- Creation code
+  - Refers to item: Statement (location: source ID 44, lines 30..31, bytes 1178..1212, hits: 1)
+- IC 484 -> Item 18
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 34..43, bytes 1262..1516, hits: 1)
+- IC 484 -> Item 19
+- Creation code
+  - Refers to item: Function "safeTransferFrom" (location: source ID 44, lines 34..43, bytes 1262..1516, hits: 1)
+- IC 1392 -> Item 20
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 41..42, bytes 1461..1509, hits: 1)
+- IC 1392 -> Item 21
+- Creation code
+  - Refers to item: Statement (location: source ID 44, lines 41..42, bytes 1461..1509, hits: 1)
+- IC 990 -> Item 22
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 45..54, bytes 1565..1845, hits: 1)
+- IC 990 -> Item 23
+- Creation code
+  - Refers to item: Function "safeBatchTransferFrom" (location: source ID 44, lines 45..54, bytes 1565..1845, hits: 1)
+- IC 2430 -> Item 24
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 52..53, bytes 1790..1838, hits: 1)
+- IC 2430 -> Item 25
+- Creation code
+  - Refers to item: Statement (location: source ID 44, lines 52..53, bytes 1790..1838, hits: 1)
+- IC 560 -> Item 26
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 56..59, bytes 1903..2071, hits: 1)
+- IC 560 -> Item 27
+- Creation code
+  - Refers to item: Function "setApprovalForAll" (location: source ID 44, lines 56..59, bytes 1903..2071, hits: 1)
+- IC 1440 -> Item 28
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 57..58, bytes 2006..2064, hits: 1)
+- IC 1440 -> Item 29
+- Creation code
+  - Refers to item: Statement (location: source ID 44, lines 57..58, bytes 2006..2064, hits: 1)
+- IC 856 -> Item 30
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 61..64, bytes 2130..2327, hits: 5)
+- IC 856 -> Item 31
+- Creation code
+  - Refers to item: Function "isApprovedForAll" (location: source ID 44, lines 61..64, bytes 2130..2327, hits: 5)
+- IC 2294 -> Item 32
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 62..63, bytes 2254..2266, hits: 0)
+- IC 2294 -> Item 33
+- Creation code
+  - Refers to item: Statement (location: source ID 44, lines 62..63, bytes 2254..2266, hits: 0)
+- IC 942 -> Item 34
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 67..70, bytes 2401..2568, hits: 5)
+- IC 942 -> Item 35
+- Creation code
+  - Refers to item: Function "supportsInterface" (location: source ID 44, lines 67..70, bytes 2401..2568, hits: 5)
+- IC 360 -> Item 38
+- Creation code
+  - Refers to item: Statement (location: source ID 44, lines 68..69, bytes 2525..2561, hits: 5)
+- IC 360 -> Item 39
+- Creation code
+  - Refers to item: None
+- IC 1133 -> Item 40
+- Creation code
+  - Refers to item: None
+- IC 1133 -> Item 41
+- Creation code
+  - Refers to item: None
+- IC 1133 -> Item 42
+- Creation code
+  - Refers to item: None
+
+Anchors for Contract "Context" (solc 0.8.25, source ID 35):
+
+Anchors for Contract "StdChains" (solc 0.8.25, source ID 3):
+
+Anchors for Contract "StdCheats" (solc 0.8.25, source ID 4):
+
+Anchors for Contract "Math" (solc 0.8.25, source ID 41):
+
+Anchors for Contract "stdError" (solc 0.8.25, source ID 5):
+
+Anchors for Contract "MockERC721" (solc 0.8.25, source ID 22):
+
+Anchors for Contract "stdStorage" (solc 0.8.25, source ID 9):
+
+Anchors for Contract "AccessControl" (solc 0.8.25, source ID 24):
+
+Anchors for Contract "ScriptBase" (solc 0.8.25, source ID 0):
+
+Anchors for Contract "Panic" (solc 0.8.25, source ID 36):
+
+Anchors for Contract "IERC20Errors" (solc 0.8.25, source ID 26):
+
+Anchors for Contract "IERC165" (solc 0.8.25, source ID 40):
+
+Anchors for Contract "safeconsole" (solc 0.8.25, source ID 23):
+
+Anchors for Contract "InGameQuestTest" (solc 0.8.25, source ID 45):
+
+Anchors for Contract "IERC1155" (solc 0.8.25, source ID 28):
+
+Anchors for Contract "StdAssertions" (solc 0.8.25, source ID 2):
+
+Anchors for Contract "IERC1155Errors" (solc 0.8.25, source ID 26):
+
+Anchors for Contract "IERC721TokenReceiver" (solc 0.8.25, source ID 19):
+
+Anchors for Contract "ERC1155Utils" (solc 0.8.25, source ID 32):
+
+Anchors for Contract "TestBase" (solc 0.8.25, source ID 0):
+
+Anchors for Contract "StorageSlot" (solc 0.8.25, source ID 38):
+
+Anchors for Contract "ERC1155" (solc 0.8.25, source ID 27):
+
+Anchors for Contract "InGameQuestScript" (solc 0.8.25, source ID 43):
+- IC 62 -> Item 0
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 13..17, bytes 580..744, hits: 8)
+- IC 62 -> Item 1
+- Creation code
+  - Refers to item: Function "constructor" (location: source ID 44, lines 13..17, bytes 580..744, hits: 8)
+- IC 70 -> Item 2
+- Creation code
+  - Refers to item: Line (location: source ID 44, lines 14..15, bytes 652..696, hits: 8)
+- IC 70 -> Item 3
+- Creation code
+  - Refers to item: Statement (location: source ID 44, lines 14..15, bytes 652..696, hits: 8)
+
+Anchors for Contract "IERC721" (solc 0.8.25, source ID 19):
+
+Anchors for Contract "IERC721Enumerable" (solc 0.8.25, source ID 19):
+
+Anchors for Contract "StdInvariant" (solc 0.8.25, source ID 6):
+
+Anchors for Contract "ERC1155Burnable" (solc 0.8.25, source ID 30):
+
+Anchors for Contract "MockERC20" (solc 0.8.25, source ID 21):
+
+Anchors for Contract "IERC1155MetadataURI" (solc 0.8.25, source ID 31):
+
+Anchors for Contract "IERC721Metadata" (solc 0.8.25, source ID 19):
+
+Anchors for Contract "StdStyle" (solc 0.8.25, source ID 10):
+
+Anchors for Contract "IERC721Errors" (solc 0.8.25, source ID 26):
+
+Anchors for Contract "VmSafe" (solc 0.8.25, source ID 14):
+
+Anchors for Contract "Arrays" (solc 0.8.25, source ID 33):
+
+Anchors for Contract "IMulticall3" (solc 0.8.25, source ID 20):
+
+Anchors for Contract "stdJson" (solc 0.8.25, source ID 7):
+
+Anchors for Contract "stdToml" (solc 0.8.25, source ID 11):
+
+Anchors for Contract "SlotDerivation" (solc 0.8.25, source ID 37):
+
+Anchors for Contract "CommonBase" (solc 0.8.25, source ID 0):
+
+Anchors for Contract "ERC165" (solc 0.8.25, source ID 39):
+
+Anchors for Contract "stdStorageSafe" (solc 0.8.25, source ID 9):
+
