@@ -5,9 +5,10 @@
 1. [Description](#description)
 2. [Features](#features)
 3. [Token ID](#token-id)
-4. [Running Tests](#running-tests)
-5. [How To Deploy The Contract](#how-to-deploy-the-contract)
-6. [Deployed Contract](#deployed-contract)
+4. [Events](#events)
+5. [Running Tests](#running-tests)
+6. [How To Deploy The Contract](#how-to-deploy-the-contract)
+7. [Deployed Contract](#deployed-contract)
 
 # Description
 
@@ -27,6 +28,28 @@ mint and mintBatch functions accept an Id that will be constructed off-chain thi
     - first 4 cypher is the game id, eg: 1234
     - whatever is after is the quest id, eg: 0001
     - the resulting id will be: #12340001
+
+## Events
+
+The contract will emit:
+
+- when `mint(address account, uint256 id, uint256 amount, bytes memory data)` is called:
+
+```solidity
+event TransferSingle(address indexed operator, address indexed from, address indexed to, uint256 id, uint256 value);
+```
+
+- when `mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)` is called:
+
+```solidity
+event TransferBatch(
+        address indexed operator,
+        address indexed from,
+        address indexed to,
+        uint256[] ids,
+        uint256[] values
+    );
+```
 
 ## Running Tests
 
