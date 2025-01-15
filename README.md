@@ -51,6 +51,18 @@ event TransferBatch(
     );
 ```
 
+- when `addGameIdAndMinter(uint256 gameID, address minter)`
+
+```
+    event MinterSet(uint256 indexed gameID, address indexed minter);
+```
+
+- when `function removeGameIdAndMinter(uint256 gameID)`
+
+```
+     event MinterRemoved(uint256 indexed gameID, address indexed minter);
+```
+
 ## Running Tests
 
 To run tests, run the following command
@@ -71,4 +83,4 @@ you need to add an account [using cast wallet import](https://book.getfoundry.sh
 
 ## Deployed Contract
 
-- testnet: [0x5BA894A5A054c7903Bc31EC83e4eFE019dD0d27C](https://subnets-test.avax.network/beam/address/0x5BA894A5A054c7903Bc31EC83e4eFE019dD0d27C?tab=code)
+- testnet: [0xBF05b6CF5dF3891327a601543719b37593047C00](https://subnets-test.avax.network/beam/address/0xBF05b6CF5dF3891327a601543719b37593047C00?tab=code)
