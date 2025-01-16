@@ -25,9 +25,10 @@ A Solidity smart contract implementing soulbound ERC1155 tokens for in-game ques
 
 mint and mintBatch functions accept an Id that will be constructed off-chain this way:
 
-    - first 4 cypher is the game id, eg: 1234
-    - whatever is after is the quest id, eg: 0001
-    - the resulting id will be: #12340001
+    - first 4 cyphers is the game id, eg: 1234
+    - second 7 cyphers for the quest id, eg: 0004567
+    - the resulting id will be: #12340004567
+This way the tokenId will always be 4+7=11 cyphers. This is an important constraint since the smart contract need it for security reasons.
 
 ## Events
 
