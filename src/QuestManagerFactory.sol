@@ -16,7 +16,6 @@ contract QuestManagerFactory is
     bytes32 public constant GAME_CREATOR_ROLE = keccak256("GAME_CREATOR_ROLE");
 
     address public implementation;
-    address private admin;
     mapping(uint256 => address) public gameIdToContract;
     mapping(address => uint256) public contractToGameId;
 
@@ -39,7 +38,6 @@ contract QuestManagerFactory is
         __AccessControl_init();
 
         implementation = _implementation;
-        admin = _defaultAdmin;
 
         _grantRole(DEFAULT_ADMIN_ROLE, _defaultAdmin);
         addGameCreators(_gameCreators);
@@ -55,7 +53,7 @@ contract QuestManagerFactory is
         // Create EIP-1167 minimal proxy
         address clone = Clones.clone(implementation);
 
-        QuestManager(clone).initialize(admin, msg.sender, gameId);
+        QuestManager(clone).initialize(msg.sender, gameId);
 
         gameIdToContract[gameId] = clone;
         contractToGameId[clone] = gameId;

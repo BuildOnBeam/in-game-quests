@@ -18,11 +18,7 @@ contract QuestManager is ERC1155, AccessControl, ERC1155Burnable {
 
     constructor() ERC1155("") {}
 
-    function initialize(
-        address _defaultAdmin,
-        address _gameCreator,
-        uint256 _gameId
-    ) external {
+    function initialize(address _gameCreator, uint256 _gameId) external {
         if (initialized) {
             revert AlreadyInitialized();
         }
@@ -31,9 +27,7 @@ contract QuestManager is ERC1155, AccessControl, ERC1155Burnable {
 
         gameId = _gameId;
 
-        _grantRole(DEFAULT_ADMIN_ROLE, _defaultAdmin);
-        _grantRole(URI_SETTER_ROLE, _defaultAdmin);
-        _grantRole(MINTER_ROLE, _defaultAdmin);
+        _grantRole(DEFAULT_ADMIN_ROLE, _gameCreator);
         _grantRole(URI_SETTER_ROLE, _gameCreator);
         _grantRole(MINTER_ROLE, _gameCreator);
     }
