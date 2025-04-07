@@ -11,6 +11,7 @@ import {Upgrades} from "../lib/openzeppelin-foundry-upgrades/src/Upgrades.sol";
 
 contract QuestManagerTest is Test {
     error AccessControlUnauthorizedAccount(address account, bytes32 neededRole);
+
     QuestManagerFactory factory;
     QuestManager questManagerImpl;
     address public proxy;
@@ -19,10 +20,7 @@ contract QuestManagerTest is Test {
     address user = address(0x3);
     address[] gameCreators;
 
-    event QuestManagerCreated(
-        uint256 indexed gameId,
-        address indexed contractAddress
-    );
+    event QuestManagerCreated(uint256 indexed gameId, address indexed contractAddress);
 
     function setUp() public {
         vm.startPrank(admin);
@@ -30,10 +28,7 @@ contract QuestManagerTest is Test {
         questManagerImpl = new QuestManager();
         proxy = Upgrades.deployUUPSProxy(
             "QuestManagerFactory.sol",
-            abi.encodeCall(
-                QuestManagerFactory.initialize,
-                (admin, address(questManagerImpl), gameCreators)
-            )
+            abi.encodeCall(QuestManagerFactory.initialize, (admin, address(questManagerImpl), gameCreators))
         );
         factory = QuestManagerFactory(proxy);
     }
@@ -58,9 +53,7 @@ contract QuestManagerTest is Test {
 
         QuestManager questManager = QuestManager(clone);
         assertEq(questManager.gameId(), gameId);
-        assertTrue(
-            questManager.hasRole(questManager.DEFAULT_ADMIN_ROLE(), gameCreator)
-        );
+        assertTrue(questManager.hasRole(questManager.DEFAULT_ADMIN_ROLE(), gameCreator));
     }
 
     function test_CannotReuseGameId() public {
@@ -80,15 +73,9 @@ contract QuestManagerTest is Test {
         QuestManager questManager = QuestManager(proxy);
 
         assertEq(questManager.gameId(), gameId);
-        assertTrue(
-            questManager.hasRole(questManager.DEFAULT_ADMIN_ROLE(), gameCreator)
-        );
-        assertTrue(
-            questManager.hasRole(questManager.URI_SETTER_ROLE(), gameCreator)
-        );
-        assertTrue(
-            questManager.hasRole(questManager.MINTER_ROLE(), gameCreator)
-        );
+        assertTrue(questManager.hasRole(questManager.DEFAULT_ADMIN_ROLE(), gameCreator));
+        assertTrue(questManager.hasRole(questManager.URI_SETTER_ROLE(), gameCreator));
+        assertTrue(questManager.hasRole(questManager.MINTER_ROLE(), gameCreator));
     }
 
     function test_QuestManagerCannotReinitialize() public {
@@ -126,9 +113,7 @@ contract QuestManagerTest is Test {
         vm.stopPrank();
 
         vm.startPrank(user);
-        vm.expectRevert(
-            QuestManager.SoulboundTokensCannotBeTransferred.selector
-        );
+        vm.expectRevert(QuestManager.SoulboundTokensCannotBeTransferred.selector);
         questManager.safeTransferFrom(user, address(0x4), 1, 1, "");
     }
 
@@ -150,9 +135,7 @@ contract QuestManagerTest is Test {
         vm.stopPrank();
         vm.startPrank(admin);
         Upgrades.upgradeProxy(
-            proxy,
-            "QuestManagerFactoryV2.sol",
-            abi.encodeCall(QuestManagerFactoryV2.initializeV2, ())
+            proxy, "QuestManagerFactoryV2.sol", abi.encodeCall(QuestManagerFactoryV2.initializeV2, ())
         );
 
         QuestManagerFactoryV2 factoryV2 = QuestManagerFactoryV2(proxy);

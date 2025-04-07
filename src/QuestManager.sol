@@ -36,39 +36,32 @@ contract QuestManager is ERC1155, AccessControl, ERC1155Burnable {
         _setURI(newuri);
     }
 
-    function mint(
-        address account,
-        uint256 id,
-        uint256 amount,
-        bytes memory data
-    ) public onlyRole(MINTER_ROLE) {
+    function mint(address account, uint256 id, uint256 amount, bytes memory data) public onlyRole(MINTER_ROLE) {
         _mint(account, id, amount, data);
     }
 
-    function mintBatch(
-        address to,
-        uint256[] memory ids,
-        uint256[] memory amounts,
-        bytes memory data
-    ) public onlyRole(MINTER_ROLE) {
+    function mintBatch(address to, uint256[] memory ids, uint256[] memory amounts, bytes memory data)
+        public
+        onlyRole(MINTER_ROLE)
+    {
         _mintBatch(to, ids, amounts, data);
     }
 
     function safeTransferFrom(
-        address /*from*/,
-        address /*to*/,
-        uint256 /*id*/,
-        uint256 /*amount*/,
+        address, /*from*/
+        address, /*to*/
+        uint256, /*id*/
+        uint256, /*amount*/
         bytes memory /*data*/
     ) public virtual override {
         revert SoulboundTokensCannotBeTransferred();
     }
 
     function safeBatchTransferFrom(
-        address /*from*/,
-        address /*to*/,
-        uint256[] memory /*ids*/,
-        uint256[] memory /*amounts*/,
+        address, /*from*/
+        address, /*to*/
+        uint256[] memory, /*ids*/
+        uint256[] memory, /*amounts*/
         bytes memory /*data*/
     ) public virtual override {
         revert SoulboundTokensCannotBeTransferred();
@@ -76,21 +69,21 @@ contract QuestManager is ERC1155, AccessControl, ERC1155Burnable {
 
     function setApprovalForAll(
         address,
-        /*operator*/ bool /*approved*/
+        /*operator*/
+        bool /*approved*/
     ) public virtual override {
         revert SoulboundTokensCannotBeApproved();
     }
 
     function isApprovedForAll(
         address,
-        /*account*/ address /*operator*/
+        /*account*/
+        address /*operator*/
     ) public view virtual override returns (bool) {
         return false;
     }
 
-    function supportsInterface(
-        bytes4 interfaceId
-    ) public view override(ERC1155, AccessControl) returns (bool) {
+    function supportsInterface(bytes4 interfaceId) public view override(ERC1155, AccessControl) returns (bool) {
         return super.supportsInterface(interfaceId);
     }
 }

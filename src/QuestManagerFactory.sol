@@ -13,6 +13,7 @@ contract QuestManagerFactory is
     AccessControlUpgradeable
 {
     error GameIdNotValid();
+
     bytes32 public constant GAME_CREATOR_ROLE = keccak256("GAME_CREATOR_ROLE");
 
     address public implementation;
