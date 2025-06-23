@@ -1,83 +1,90 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.22;
 
-import {Initializable} from "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
-import {UUPSUpgradeable} from "@openzeppelin/contracts-upgradeable/proxy/utils/UUPSUpgradeable.sol";
-import {AccessControlUpgradeable} from "@openzeppelin/contracts-upgradeable/access/AccessControlUpgradeable.sol";
-import {Clones} from "@openzeppelin/contracts/proxy/Clones.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {QuestManager} from "./QuestManager.sol";
 
-contract QuestManagerFactory is
-    Initializable,
-    UUPSUpgradeable,
-    AccessControlUpgradeable
-{
-    error GameIdNotValid();
+/// @title QuestManagerFactory
+/// @notice Factory contract to create and manage QuestManager instances for games
+contract QuestManagerFactory is AccessControl {
+    /// @notice Error thrown when a game ID is already in use
+    error GameIdAlreadyUsed();
+    /// @notice Error thrown when an invalid address is provided
+    error InvalidAddress();
 
     bytes32 public constant GAME_CREATOR_ROLE = keccak256("GAME_CREATOR_ROLE");
 
-    address public implementation;
-    mapping(uint256 => address) public gameIdToContract;
-    mapping(address => uint256) public contractToGameId;
+    mapping(string => address) public gameIdToContract;
+    mapping(address => string) public contractToGameId;
 
+    /// @notice Emitted when a new QuestManager is created
+    /// @param gameId The ID of the game
+    /// @param contractAddress The address of the created QuestManager
     event QuestManagerCreated(
-        uint256 indexed gameId,
+        string indexed gameId,
         address indexed contractAddress
     );
 
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() {
-        _disableInitializers();
-    }
-
-    function initialize(
-        address _defaultAdmin,
-        address _implementation,
-        address[] memory _gameCreators
-    ) external initializer {
-        __UUPSUpgradeable_init();
-        __AccessControl_init();
-
-        implementation = _implementation;
-
+    /// @notice Constructor to initialize the factory
+    /// @param _gameCreators Array of addresses to grant GAME_CREATOR_ROLE
+    /// @param _defaultAdmin Address to grant DEFAULT_ADMIN_ROLE
+    constructor(address[] memory _gameCreators, address _defaultAdmin) {
+        if (_defaultAdmin == address(0)) revert InvalidAddress();
         _grantRole(DEFAULT_ADMIN_ROLE, _defaultAdmin);
-        addGameCreators(_gameCreators);
+        _addGameCreators(_gameCreators);
     }
 
+    /// @notice Creates a new QuestManager contract for a game
+    /// @param gameId Unique ID for the game
+    /// @return Address of the created QuestManager
     function createQuestManager(
-        uint256 gameId
+        string memory gameId
     ) external onlyRole(GAME_CREATOR_ROLE) returns (address) {
-        if (gameIdToContract[gameId] != address(0)) {
-            revert GameIdNotValid();
-        }
+        if (gameIdToContract[gameId] != address(0)) revert GameIdAlreadyUsed();
 
-        // Create EIP-1167 minimal proxy
-        address clone = Clones.clone(implementation);
+        QuestManager questManager = new QuestManager(msg.sender, gameId);
+        address questManagerAddress = address(questManager);
 
-        QuestManager(clone).initialize(msg.sender, gameId);
+        gameIdToContract[gameId] = questManagerAddress;
+        contractToGameId[questManagerAddress] = gameId;
 
-        gameIdToContract[gameId] = clone;
-        contractToGameId[clone] = gameId;
-
-        emit QuestManagerCreated(gameId, clone);
-        return clone;
+        emit QuestManagerCreated(gameId, questManagerAddress);
+        return questManagerAddress;
     }
 
+    /// @notice Retrieves the QuestManager address for a game ID
+    /// @param gameId The ID of the game
+    /// @return Address of the QuestManager contract
     function getQuestManagerContract(
-        uint256 gameId
+        string memory gameId
     ) external view returns (address) {
         return gameIdToContract[gameId];
     }
 
+    /// @notice Adds game creators with GAME_CREATOR_ROLE
+    /// @param _gameCreators Array of addresses to grant the role
     function addGameCreators(
         address[] memory _gameCreators
-    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        _addGameCreators(_gameCreators);
+    }
+
+    /// @notice Removes game creators by revoking GAME_CREATOR_ROLE
+    /// @param _gameCreators Array of addresses to revoke the role
+    function removeGameCreators(
+        address[] memory _gameCreators
+    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
         for (uint256 i = 0; i < _gameCreators.length; i++) {
-            grantRole(GAME_CREATOR_ROLE, _gameCreators[i]);
+            if (_gameCreators[i] == address(0)) revert InvalidAddress();
+            revokeRole(GAME_CREATOR_ROLE, _gameCreators[i]);
         }
     }
 
-    function _authorizeUpgrade(
-        address newImplementation
-    ) internal override onlyRole(DEFAULT_ADMIN_ROLE) {}
+    /// @dev Internal function to add game creators
+    function _addGameCreators(address[] memory _gameCreators) internal {
+        for (uint256 i = 0; i < _gameCreators.length; i++) {
+            if (_gameCreators[i] == address(0)) revert InvalidAddress();
+            grantRole(GAME_CREATOR_ROLE, _gameCreators[i]);
+        }
+    }
 }

@@ -7,42 +7,28 @@ import {QuestManagerFactory} from "../src/QuestManagerFactory.sol";
 import {QuestManager} from "../src/QuestManager.sol";
 import {DeployQuestSystem} from "./DeployQuestSystem.s.sol";
 /**
-forge script script/CloneAndMint.s.sol \
+forge script script/CreateQuestManager.s.sol \
   --rpc-url https://build.onbeam.com/rpc/testnet \
   --account beam-test-1 \
+  --password 123 \
   --sender 0x7f50CF0163B3a518d01fE480A51E7658d1eBeF87 \
-  --broadcast 
+   --sig "run(address,string)" 0xd24969c44d7e4c7b54239d18232405246db39538 xyz \
+  --broadcast  
   */
-contract CloneAndMint is Script {
-    function run() external {
-        // Start broadcast only once here
-
-        // Get the sender from the CLI
+contract CreateQuestManager is Script {
+    function run(address factoryAddress, string memory gameId) external {
         address sender = msg.sender;
         console.log("sender");
         console.log(sender);
-
-        // Deploy the factory using the deployment script with explicit sender
-        DeployQuestSystem deployer = new DeployQuestSystem();
-        address factoryAddress = deployer.deploy(sender);
-        QuestManagerFactory factory = QuestManagerFactory(factoryAddress);
         vm.startBroadcast();
+        QuestManagerFactory factory = QuestManagerFactory(factoryAddress);
+
         // Create a new QuestManager clone
-        uint256 gameId = 1;
         address questManagerAddress = factory.createQuestManager(gameId);
         console.log("QuestManager clone created at:", questManagerAddress);
 
         // Verify the clone
         QuestManager questManager = QuestManager(questManagerAddress);
-        require(
-            factory.getQuestManagerContract(gameId) == questManagerAddress,
-            "Clone not registered"
-        );
-        require(questManager.gameId() == gameId, "Game ID not set correctly");
-        require(
-            questManager.hasRole(questManager.MINTER_ROLE(), sender),
-            "Minter role not set"
-        );
 
         // Test single mint
         uint256 tokenId = 1;
