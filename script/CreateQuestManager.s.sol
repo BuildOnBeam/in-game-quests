@@ -5,7 +5,8 @@ import {Script} from "forge-std/Script.sol";
 import {console} from "forge-std/console.sol";
 import {QuestManagerFactory} from "../src/QuestManagerFactory.sol";
 import {QuestManager} from "../src/QuestManager.sol";
-import {DeployQuestSystem} from "./DeployQuestSystem.s.sol";
+
+// import {DeployQuestSystem} from "./DeployQuestSystem.s.sol";
 /**
 forge script script/CreateQuestManager.s.sol \
   --rpc-url https://build.onbeam.com/rpc/testnet \
